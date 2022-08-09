@@ -1,3 +1,6 @@
+const Manager = require("./lib/Manager")
+const Intern = require("./lib/Intern")
+const Engineer = require("./lib/Engineer")
 const inquirer = require("inquirer")
 const fs = require("fs")
 // creates array of employee's 
@@ -9,7 +12,7 @@ const promptManager = () => {
         {
             type: "input",
             name: "name",
-            message: "What is the employee's name? ", 
+            message: "What is the managers's name? ", 
             validate: (input) => {
                 if (input) {
                     return true
@@ -21,7 +24,7 @@ const promptManager = () => {
         {
             type: "input",
             name: "id",
-            message: "What is the employee's id number? ", 
+            message: "What is the manager's id number? ", 
             validate: (input) => {
                 if (input) {
                     return true
@@ -33,7 +36,7 @@ const promptManager = () => {
         {
             type: "input",
             name: "email",
-            message: "What is the employee's email? ", 
+            message: "What is the manager's email? ", 
             validate: (input) => {
                 if (input) {
                     return true
@@ -61,9 +64,12 @@ const promptManager = () => {
             message: "Would you like to add more team members? "
         }
     ]).then((data) => {
+        manager = new Manager(data.name, data.email, data.id, data.officeNumber);
+		employeesArr.push(manager);
         if (data.confirmMore) {
-            employeesArr.push(data)
-            promptEmployee(employeesArr)
+            return promptEmployee(employeesArr)
+        } else {
+            return employeesArr
         }
     });
 }
@@ -157,8 +163,15 @@ const promptEmployee = (employeesArr) => {
         }
         // rerun prompts if another team member to be added
     ]).then((data) => {
-        // add new team member to array 
-        employeesArr.push(data)
+        // add new team member object to array 
+        if (data.employeeType === "Engineer") {
+            let engineer = new Engineer(data.name, data.email, data.id, data.github)
+            employeesArr.push(engineer);
+        } else {
+            let intern = new Intern(data.name, data.email, data.id, data.school)
+            employeesArr.push(intern)
+        }
+    
         console.log(employeesArr)
         if (data.confirmMore) {
             // rerun prompts ensuring that previous members are saved
