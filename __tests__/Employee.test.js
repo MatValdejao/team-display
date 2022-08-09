@@ -1,9 +1,9 @@
 const Employee = require("../lib/Employee");
 
-test("creates an enemy object", () => {
-	const employee = new Employee("Dave", "dave@email.com");
+test("creates an employee object", () => {
+	const employee = new Employee("Dave", "dave@email.com", 123);
 
-	expect(employee.name).toBe(expect.any(String));
-    expect(employee.email).toBe(expect.any(String));
-    expect(employee.id).toBe(expect.any(Number));
+	expect(employee.name).toBe("Dave");
+    expect(employee.email).toBe("dave@email.com");
+    expect(employee.id).toBe(123);
 });
