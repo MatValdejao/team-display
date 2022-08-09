@@ -26,3 +26,10 @@ test("gets employee id number", () => {
 
     expect(employee.getId()).toBe(123)
 })
+
+test("gets employee role", () => {
+    const employee = new Employee("Dave", "dave@email.com", 123)
+
+    expect(employee.getRole()).toBe("Employee")
+
+})
