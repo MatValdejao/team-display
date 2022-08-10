@@ -1,3 +1,6 @@
+
+
+// function will handle creating all employee cards
 const generateEmployeeItems = (employeesArr) => {
     
 }
