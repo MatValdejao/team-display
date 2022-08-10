@@ -2,9 +2,10 @@ const Manager = require("./lib/Manager")
 const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
 const inquirer = require("inquirer")
-const fs = require("fs")
+
 // impors function to contruct HTML page
 const generateHTML = require("./src/page-template")
+const writeFile = require("./src/generate-site")
 // creates array of employee's 
 let employeesArr = []
 
@@ -185,10 +186,13 @@ const promptEmployee = (employeesArr) => {
     })
 }
 
+// will run application and run through promises to generate HTML page
 promptManager().then((employeesArr) => {
     console.log(employeesArr)
     return generateHTML(employeesArr)
 }).then(pageHTML => {
-    
+    writeFile(pageHTML)
+}).catch(err => {
+    console.log(err)
 })
 
