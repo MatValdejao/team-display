@@ -22,9 +22,9 @@ const generateEmployeeItems = (employeesArr) => {
             // sets icon of employeeType
             icon = `<i class="bi bi-cup-hot-fill"></i`
         } else if (employeesArr[i].getRole() === "Intern") {
-            icon = 
+            icon = `<i class="bi bi-search"></i>`
         } else {
-            icon =
+            icon = `<i class="bi bi-book-half"></i>`;
         }
 
         // return html card for employee
@@ -58,6 +58,7 @@ const generateHTML = (employeesArr) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Team Members</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./style.css">
     </head>

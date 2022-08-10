@@ -185,6 +185,10 @@ const promptEmployee = (employeesArr) => {
     })
 }
 
-
-
+promptManager().then((employeesArr) => {
+    console.log(employeesArr)
+    return generateHTML(employeesArr)
+}).then(pageHTML => {
+    
+})
 
