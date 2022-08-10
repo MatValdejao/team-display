@@ -4,14 +4,13 @@ const Engineer = require("./lib/Engineer")
 const inquirer = require("inquirer")
 
 // impors function to contruct HTML page
-const generateHTML = require("./src/page-template")
+const recreateObjects = require("./src/page-template")
 const writeFile = require("./src/generate-site")
 // creates array of employee's 
 let employeesArr = []
 
 const promptManager = () => {
-
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: "input",
             name: "name",
@@ -68,7 +67,7 @@ const promptManager = () => {
         }
     ]).then((data) => {
         let manager = new Manager(data.name, data.email, data.id, data.officeNumber);
-		employeesArr.push(manager);
+        employeesArr.push(manager);
         if (data.confirmMore) {
             return promptEmployee(employeesArr)
         } else {
@@ -78,9 +77,8 @@ const promptManager = () => {
 }
 
 const promptEmployee = (employeesArr) => {
-
     // enquire about added employee
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: "list", 
             name: "employeeType",
@@ -174,8 +172,6 @@ const promptEmployee = (employeesArr) => {
             let intern = new Intern(data.name, data.email, data.id, data.school)
             employeesArr.push(intern)
         }
-    
-        console.log(employeesArr)
         if (data.confirmMore) {
             // rerun prompts ensuring that previous members are saved
             return promptEmployee(employeesArr)
@@ -187,12 +183,13 @@ const promptEmployee = (employeesArr) => {
 }
 
 // will run application and run through promises to generate HTML page
-promptManager().then((employeesArr) => {
-    console.log(employeesArr)
-    return generateHTML(employeesArr)
+promptManager().then(() => {
+    return recreateObjects(JSON.stringify(employeesArr))
 }).then(pageHTML => {
     writeFile(pageHTML)
 }).catch(err => {
     console.log(err)
 })
+
+
 
