@@ -3,6 +3,8 @@ const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
 const inquirer = require("inquirer")
 const fs = require("fs")
+// impors function to contruct HTML page
+const generateHTML = require("./src/page-template")
 // creates array of employee's 
 let employeesArr = []
 
@@ -64,7 +66,7 @@ const promptManager = () => {
             message: "Would you like to add more team members? "
         }
     ]).then((data) => {
-        manager = new Manager(data.name, data.email, data.id, data.officeNumber);
+        let manager = new Manager(data.name, data.email, data.id, data.officeNumber);
 		employeesArr.push(manager);
         if (data.confirmMore) {
             return promptEmployee(employeesArr)
@@ -183,5 +185,6 @@ const promptEmployee = (employeesArr) => {
     })
 }
 
-promptManager()
+
+
 

@@ -1,8 +1,51 @@
-
+// function will filter card info for specific employee type
+const filterCardInfo = (employeeArr, i) => {
+    // i paramater ensures that we are checking correct employee 
+    // function will return info depending on employee type
+    if (employeeArr[i].getRole() === "Manager") {
+        return `Office Number: ${employeeArr[i].officeNumber}`
+    } else if (employeeArr[i].getRole() === "Engineer") {
+        return `GitHub: ${employeeArr[i].getGithub()}`
+    } else {
+        return `School: ${employeeArr[i].getSchool()}`
+    }
+}
 
 // function will handle creating all employee cards
 const generateEmployeeItems = (employeesArr) => {
-    
+    // iterate through object array and create employee card
+    let icon = "";
+
+    // ensures manager as an employee type to facilitate in page appending
+    for (let i = 0; i < employeesArr.length; i++) {
+        if (employeesArr[i].getRole() === "Manager") {
+            // sets icon of employeeType
+            icon = `<i class="bi bi-cup-hot-fill"></i`
+        } else if (employeesArr[i].getRole() === "Intern") {
+            icon = 
+        } else {
+            icon =
+        }
+
+        // return html card for employee
+        return `
+        <div class="col-12 col-lg-3 col-md-4">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header">${employeesArr[i].getName()}</div>
+                <div class="card-body">
+                    <h5 class="card-title">${icon}${employeesArr[i].getRole()}</h5>
+                    <div class="card-info">
+                        <ul class="list-group">
+                            <li class="list-group-item">ID: ${employeesArr[i].getId()}</li>
+                            <li class="list-group-item">Email: ${employeesArr[i].getEmail()}</li>
+                            <li class="list-group-item">${filterCardInfo(employeesArr, i)}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }
 }
 
 const generateHTML = (employeesArr) => {
@@ -29,10 +72,13 @@ const generateHTML = (employeesArr) => {
         </header>
         <main class="container">
             <div class="row">
-                ${console.log("will run generation of card items in page")}
+                ${generateEmployeeItems(employeesArr)}
             </div>                       
         </main>
     </body>
     </html>
     `;
 };
+
+// exports the function
+module.exports = generateHTML
