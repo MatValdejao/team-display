@@ -1,5 +1,6 @@
 const Employee = require("../lib/Employee");
 
+// checks for object construction 
 test("creates an employee object", () => {
 	const employee = new Employee("Dave", "dave@email.com", 123);
 
@@ -8,6 +9,7 @@ test("creates an employee object", () => {
     expect(employee.id).toBe(123);
 });
 
+// tests all methods
 test("gets employee name", () => {
     const employee = new Employee("Dave", "dave@email.com", "123");
 

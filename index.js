@@ -9,7 +9,9 @@ const writeFile = require("./src/generate-site")
 // creates array of employee's 
 let employeesArr = []
 
+// prompts managerial role first 
 const promptManager = () => {
+    // questions
     return inquirer.prompt([
         {
             type: "input",
@@ -60,11 +62,13 @@ const promptManager = () => {
                 }
             }
         },
+        // checks whether to move on with next prompt
         {
             type: "confirm",
             name: "confirmMore",
             message: "Would you like to add more team members? "
         }
+        // creates manager object and checks whether more employees to be added
     ]).then((data) => {
         let manager = new Manager(data.name, data.email, data.id, data.officeNumber);
         employeesArr.push(manager);
@@ -76,6 +80,7 @@ const promptManager = () => {
     });
 }
 
+// prompts rest of team members information
 const promptEmployee = (employeesArr) => {
     // enquire about added employee
     return inquirer.prompt([
@@ -157,6 +162,7 @@ const promptEmployee = (employeesArr) => {
                 }
             }
         },
+        // checks whether to add more team members
         {
             type: "confirm",
             name: "confirmMore",
